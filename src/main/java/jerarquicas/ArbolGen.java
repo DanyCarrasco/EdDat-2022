@@ -398,4 +398,80 @@ public class ArbolGen {
         }
 
     }
+
+    public boolean verificarCamino(Lista lis) {
+        /**/
+        Lista ls = lis.clone();
+        boolean resultado = false;
+        if (ls.esVacia() && this.raiz == null) {
+            resultado = true;
+        } else {
+            resultado = verificarCaminoAux(this.raiz, lis);
+        }
+        return resultado;
+    }
+
+    private boolean verificarCaminoAux(NodoGen n, Lista ls) {
+        //No funciona
+        boolean exito = true;
+        //Esta relacionado con el esVacio de la lista clonada (eso creo??)
+        if (n != null && !ls.esVacia()) {
+            Object elem = ls.recuperar(1);
+            if (n.getElem().equals(elem)) {
+                ls.eliminar(1);
+                exito = verificarCaminoAux(n.getHijoIzquierdo(), ls);
+            } else {
+                if (n.getHijoIzquierdo() != null) {
+                    NodoGen hijo = n.getHijoIzquierdo().getHermanoDerecho();
+                    boolean encontrado = false;
+                    while (!encontrado && hijo != null) {
+                        if (hijo.getElem().equals(elem)) {
+                            encontrado = true;
+                        } else {
+                            hijo = hijo.getHermanoDerecho();
+                        }
+                    }
+                    if (encontrado) {
+                        ls.eliminar(1);
+                        exito = verificarCaminoAux(hijo.getHijoIzquierdo(), ls);
+                    } else {
+                        //Corta con la comparacion y retorna false
+                        exito = false;
+                    }
+                }
+            }
+        } else {
+            exito = false;
+        }
+        return exito;
+    }
+
+    public Lista listarEstreNiveles(int nivel1, int nivel2) {
+        Lista lis = new Lista();
+        listarEstreNivelesAux(this.raiz, lis, nivel1, nivel2, 0);
+        return lis;
+    }
+
+    private void listarEstreNivelesAux(NodoGen n, Lista ls, int nivel1, int nivel2, int nivActual) {
+        if (n != null) {
+            //llamado recursivo con primer hijo de n
+            if (n.getHijoIzquierdo() != null) {
+                listarEstreNivelesAux(n.getHijoIzquierdo(), ls, nivel1, nivel2, nivActual + 1);
+            }
+
+            //visita del nodo n
+            if (nivel1 <= nivActual && nivActual <= nivel2) {
+                ls.insertar(n.getElem(), ls.longitud() + 1);
+            }
+
+            //llamados recursivos con los otros hijos de n
+            if (n.getHijoIzquierdo() != null) {
+                NodoGen hijo = n.getHijoIzquierdo().getHermanoDerecho();
+                while (hijo != null) {
+                    listarEstreNivelesAux(hijo, ls, nivel1, nivel2, nivActual + 1);
+                    hijo = hijo.getHermanoDerecho();
+                }
+            }
+        }
+    }
 }

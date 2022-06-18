@@ -127,7 +127,7 @@ public class ArbolBB {
             }
         }
     }
-    
+
     private void caso3(NodoABB nodo, NodoABB hijo) {
 
         if (hijo.getIzquierdo() == null) {
@@ -159,8 +159,7 @@ public class ArbolBB {
         hijoMinDer.setIzquierdo(hijoIzq);
         
     }*/
-    
-    /*private void caso3(NodoABB nodo, NodoABB hijo) {
+ /*private void caso3(NodoABB nodo, NodoABB hijo) {
 
         if (hijo.getIzquierdo() == null) {
             //  el candidato es el hijo derecho del nodo
@@ -173,7 +172,6 @@ public class ArbolBB {
             hijo.setIzquierdo(candidato.getDerecho());
         }
     }*/
-
     private NodoABB buscarMinDer(NodoABB n) {
         NodoABB encontrado = null;
         if (n != null) {
@@ -381,5 +379,51 @@ public class ArbolBB {
             cadena = stringAux(nodo.getDerecho(), cadena);
         }
         return cadena;
+    }
+
+    public void eliminarMinimo() {
+        if (this.raiz.getIzquierdo() != null) {
+            eliminarMinimoAux(this.raiz.getIzquierdo(), this.raiz);
+        }
+    }
+
+    private void eliminarMinimoAux(NodoABB n, NodoABB padre) {
+        if (n.getIzquierdo() == null) {
+            padre.setIzquierdo(n.getDerecho());
+        } else {
+            eliminarMinimoAux(n.getIzquierdo(), n);
+        }
+    }
+
+    public ArbolBB clonarParteInvertida(Comparable elem) {
+        ArbolBB arbolClon = new ArbolBB();
+        arbolClon.raiz = clonarParteInvertida2(elem, this.raiz);
+        return arbolClon;
+    }
+
+    private NodoABB clonarParteInvertida2(Comparable elem, NodoABB n) {
+        NodoABB clonInvertido = null;
+        if (n != null) {
+            if (n.getElem().compareTo(elem) == 0) {
+                clonInvertido = invertir(n);
+            } else {
+                if (n.getElem().compareTo(elem) < 0) {
+                    clonInvertido = clonarParteInvertida2(elem, n.getIzquierdo());
+                } else {
+                    clonInvertido = clonarParteInvertida2(elem, n.getDerecho());
+                }
+            }
+        }
+        return clonInvertido;
+    }
+
+    private NodoABB invertir(NodoABB n) {
+        NodoABB nInvertido = null;
+        if (n != null) {
+            nInvertido = new NodoABB(n.getElem(), null, null);
+            nInvertido.setIzquierdo(invertir(n.getDerecho()));
+            nInvertido.setDerecho(invertir(n.getIzquierdo()));
+        }
+        return nInvertido;
     }
 }

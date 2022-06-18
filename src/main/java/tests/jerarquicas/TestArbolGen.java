@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package tests.jerarquicas;
+
 import jerarquicas.ArbolGen;
 import lineales.dinamicas.Lista;
 
@@ -11,28 +12,26 @@ import lineales.dinamicas.Lista;
  * @author casa
  */
 public class TestArbolGen {
+
     public static void main(String[] args) {
         ArbolGen arbolA = new ArbolGen();
-        arbolA.insertar(1, 1);
-        arbolA.insertar(2, 1);
-        arbolA.insertar(3, 1);
-        arbolA.insertar(4, 3);
-        System.out.println(arbolA.toString()+"\n");
-        
-        System.out.println("Probamos clone, retorna un arbol clonado de arbolA: arbolB");
-        ArbolGen arbolB = arbolA.clone();
-        System.out.println(arbolB.toString()+"\n");
-        
-        System.out.println("Probamos padre buscando el padre de '4'");
-        System.out.println(arbolA.padre(4));
-        
-        System.out.println("Probamos con altura con el arbolA y '4', retorna 3");
-        System.out.println(arbolA.nivel(4));
-        
-        System.out.println("Probamos ancestros con arbolA, retorna ancestros de 4");
-        System.out.println(arbolA.ancestros(4).toString());
-        
-        System.out.println("Probamos frontera, retorna las hojas del arbolA");
-        System.out.println(arbolA.frontera().toString());
+        arbolA.insertar(20, 0);
+        arbolA.insertar(13, 20);
+        arbolA.insertar(54, 20);
+        arbolA.insertar(15, 13);
+        arbolA.insertar(12, 13);
+        arbolA.insertar(11, 54);
+        arbolA.insertar(27, 54);
+        arbolA.insertar(4, 54);
+        arbolA.insertar(17, 27);
+        System.out.println(arbolA.toString() + "\n");
+        Lista lis1 = new Lista();
+        lis1.insertar(20, 1);
+        lis1.insertar(54, 2);
+        lis1.insertar(27, 3);
+        System.out.println("Probar verificar camino con <20,54,27>, retorna true");
+        System.out.println(arbolA.verificarCamino(lis1));
+//        System.out.println("Probar listarEntreNiveles(1, 2), retorna los hijos de 1 y los hijos de 3 en inorden");
+//        System.out.println(arbolA.listarEstreNiveles(1, 2).toString());
     }
 }

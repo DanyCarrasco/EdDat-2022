@@ -4,6 +4,7 @@
  */
 package tests.finales;
 import lineales.dinamicas.Pila;
+import lineales.dinamicas.Cola;
 
 /**
  *

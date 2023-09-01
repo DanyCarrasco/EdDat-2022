@@ -1,0 +1,9 @@
+lineales\dinamicas\Pila.class
+tests\lineales\TestingPila.class
+tests\lineales\TestCola.class
+lineales\estaticas\Cola.class
+lineales\dinamicas\Nodo.class
+lineales\estaticas\Pila.class
+tests\finales\TestPila.class
+Utiles\TecladoIn.class
+tests\finales\TestPilaDinamica.class

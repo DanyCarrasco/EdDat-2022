@@ -20,14 +20,15 @@ public class TestPila {
         // TODO code application logic here
         //Apilamos elementos con un PARA y nos indica si lo hizo con exito
         Pila pilaEst = new Pila();
-        for (int i = 1; i <= 10; i++) {
-            System.out.print(i + " ");
-            System.out.println(pilaEst.apilar(i));
-        }
+        System.out.println(pilaEst.apilar(1));
+        System.out.println(pilaEst.toString());
+//        for (int i = 1; i <= 10; i++) {
+//            pilaEst.apilar(i);
+//        }
 
         /*Probaremos con desapilar un elemento del tope (en este caso, 
         el elemento '10') y retorna si hubo exito en ello*/
-        System.out.println("Desapilaremos el elemento del tope");
+/*        System.out.println("Desapilaremos el elemento del tope");
         if (pilaEst.desapilar()) {
             System.out.println("Se desapilo el elemento '10' del tope con exito");
         } else {
@@ -72,6 +73,6 @@ public class TestPila {
         pilaAux = pilaEst.clone();
         pilaEst.toString();
         pilaAux.toString();
-        
+   */     
     }
 }

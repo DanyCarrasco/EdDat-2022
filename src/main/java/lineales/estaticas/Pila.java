@@ -43,7 +43,7 @@ public class Pila {
         //Retorna 'exito' y le asignamos 'false'
         boolean exito = false;
         //Precondicion: para verificar que la pila no esta vacia
-        if (!esVacia()) {
+        if (!(this.tope == -1)) {
             //Asigna 'null' en el tope de Pila y decrementa a tope
             this.arreglo[tope] = null;
             this.tope--;
@@ -57,7 +57,7 @@ public class Pila {
         //Retorna 'elem' y le asigno 'null'
         Object elem = null;
         //Precondicion
-        if (!esVacia()) {
+        if (!(this.tope == -1)) {
             elem = this.arreglo[tope];
         }
         return elem;
@@ -71,13 +71,13 @@ public class Pila {
     public void vaciar() {
         //Saca todos los elementos de la pila.
         //Precondicion: se ejecuta mientras la pila no este vacia
-        while (!esVacia()) {
+        while (!(this.tope == -1)) {
             //Asigna 'null' al tope de Pila y decrementa tope
             arreglo[tope] = null;
             this.tope--;
         }
     }
-
+    
     public Pila clone() {
         /*Devuelve una copia exacta de los datos en la estructura original, 
         y respetando el orden de los mismos, en otra estructura del mismo tipo*/
@@ -98,7 +98,7 @@ public class Pila {
         en la etapa de prueba*/
         String cadPila = "Pila vacia";
         //Precondicion: si la pila no esta vacia
-        if (!esVacia()) {
+        if (!(this.tope == -1)) {
             cadPila = "[";
             for (int i = 0; i < this.tope + 1; i++) {
                 cadPila = cadPila + this.arreglo[i];

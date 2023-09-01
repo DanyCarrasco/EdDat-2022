@@ -5,6 +5,7 @@
 package lineales.dinamicas;
 
 import lineales.dinamicas.Nodo;
+import lineales.dinamicas.Pila;
 
 /**
  *
@@ -107,5 +108,46 @@ public class Cola {
             cadCola = cadCola + "]";
         }
         return cadCola;
+    }
+    
+    private int cuentaSecuenciasAux(Nodo n, Pila p1){
+        int contador = 0;
+        if (n != null) {
+            Nodo aux = apilarYEncontrar(p1, n);
+            if (verificarCapicua(p1, n)) {
+                contador = 1 + cuentaSecuenciasAux(aux.getEnlace(), p1);
+            } else {
+                contador = cuentaSecuenciasAux(aux.getEnlace(), p1);
+            }
+        }
+        return contador;
+    }
+    
+    private Nodo apilarYEncontrar(Pila p1, Nodo n){
+        Nodo aux=null;
+        if (n!= null) {
+            if (!n.getElem().equals('$')) {
+                p1.apilar(n.getElem());
+                aux = apilarYEncontrar(p1, n.getEnlace());
+            } else {
+                aux = n;
+            }
+        }
+        return aux;
+    }
+    
+    private boolean verificarCapicua (Pila p1, Nodo n){
+        boolean capicua = true;
+        if (!p1.esVacia() &&(n != null || !n.getElem().equals('$'))) {
+            Object elem = p1.obtenerTope();
+            p1.desapilar();
+            if (n.getElem().equals(elem)) {
+                capicua = verificarCapicua(p1, n);
+            } else {
+                capicua = false;
+                p1.vaciar();
+            }
+        }
+        return capicua;
     }
 }

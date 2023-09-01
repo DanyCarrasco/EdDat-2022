@@ -474,4 +474,37 @@ public class ArbolGen {
             }
         }
     }
+
+    public void repetirHEI(Object a) {
+        NodoGen n = encontrar(this.raiz, a);
+        insertar (n, a);
+    }
+
+    private NodoGen encontrar(NodoGen n, Object elem) {
+        NodoGen encontrado = null;
+        if (n != null) {
+            NodoGen aux = n.getHijoIzquierdo();
+            if (aux != null) {
+                if (aux.getElem().equals(elem)) {
+                    encontrado = aux;
+                } else {
+                    encontrado = encontrar (aux, elem);
+                }
+            }
+        }
+        return encontrado;
+    }
+
+    private void insertar(NodoGen n, Object elem) {
+        if (n != null) {
+            NodoGen aux = n.getHermanoDerecho();
+            if (aux != null) {
+                if (!aux.getElem().equals(elem) && aux.getHermanoDerecho() == null) {
+                    aux.setHermanoDerecho(new NodoGen (elem, null, null));
+                } else {
+                    insertar (aux, elem);
+                }
+            }
+        }
+    }
 }

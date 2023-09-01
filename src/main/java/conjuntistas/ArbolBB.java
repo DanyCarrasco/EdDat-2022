@@ -158,8 +158,8 @@ public class ArbolBB {
         //cambia el hijo izquierdo de n con el hijoIzq del nodo para eliminar
         hijoMinDer.setIzquierdo(hijoIzq);
         
-    }*/
- /*private void caso3(NodoABB nodo, NodoABB hijo) {
+    }
+ private void caso3(NodoABB nodo, NodoABB hijo) {
 
         if (hijo.getIzquierdo() == null) {
             //  el candidato es el hijo derecho del nodo
@@ -425,5 +425,39 @@ public class ArbolBB {
             nInvertido.setDerecho(invertir(n.getIzquierdo()));
         }
         return nInvertido;
+    }
+
+    public void eliminarHojasEnRango(int min, int max) {
+        if (this.raiz.getIzquierdo() == null && this.raiz.getDerecho() == null) {
+            if (this.raiz.getElem().compareTo(min) >= 0 && this.raiz.getElem().compareTo(max) <= 0) {
+                this.raiz = null;
+            }
+        } else {
+            eliminarHojasEnRangoAux(this.raiz, min, max);
+        }
+    }
+
+    private boolean eliminarHojasEnRangoAux(NodoABB n, int min, int max) {
+        boolean hoja = false;
+        if (n != null) {
+            if (n.getIzquierdo() == null && n.getDerecho() == null) {
+                if ((n.getElem().compareTo(min) >= 0) && (n.getElem().compareTo(max) <= 0)) {
+                    hoja = true;
+                }
+            }
+
+            if (n.getElem().compareTo(min) > 0) {
+                if (eliminarHojasEnRangoAux(n.getIzquierdo(), min, max)) {
+                    n.setIzquierdo(null);
+                }
+            }
+
+            if (n.getElem().compareTo(max) < 0) {
+                if (eliminarHojasEnRangoAux(n.getDerecho(), min, max)) {
+                    n.setDerecho(null);
+                }
+            }
+        }
+        return hoja;
     }
 }
